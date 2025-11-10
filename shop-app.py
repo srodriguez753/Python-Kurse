@@ -26,19 +26,30 @@ def admin_login():
         if password_login == admin_password:
             os.system("cls")
             admin_choices = input(
-                "Choose action: Add product (a) Edit existing product (e) Delete product (d) Show products (s) Logout (l)")
+                "Choose action: \n Add product (a) \n Edit existing product (e) \n Delete product (d) \n Show products (s) \n Logout (l)")
             if admin_choices == "a":
                 os.system("cls")
-                new_product = input("What product would you like to add?:")
-                all_products.append(new_product)
+                new_product = input("New product:")
+                new_price = float(input("New product price:"))
+                all_products.append({"name": new_product, "price": new_price})
             elif admin_choices == "e":
                 os.system("cls")
-                edit_product = input("What product would you like to edit?:")
+                for x in all_products:
+                    print(x["name"], x["price"])
+                edit_product = int(
+                    input("What product would you like to edit?:"))
+                all_products[edit_product - 1]["name"] = input(
+                    f"Give new name for {all_products[edit_product - 1]["name"]}: ")
+                all_products[edit_product - 1]["price"] = input(
+                    f"Give new price for {all_products[edit_product - 1]["price"]}: ")
+
             elif admin_choices == "d":
                 os.system("cls")
-                delete_product = input(
-                    "What product would you like to delete?:")
-                all_products.pop(delete_product)
+                for x in all_products:
+                    print(x["name"], x["price"])
+                delete_product = int(input(
+                    "What product would you like to delete?:"))
+                all_products.pop(delete_product - 1)
             elif admin_choices == "s":
                 os.system("cls")
                 for x in all_products:
@@ -74,8 +85,10 @@ def customer_login():
                         "Which item would you like to add? To go back press X:")
 
                     if user_choice == "X":
+                        os.system("cls")
                         break
                     elif user_choice == "x":
+                        os.system("cls")
                         break
                     else:
                         user_choice = int(user_choice)
@@ -106,7 +119,8 @@ def customer_login():
 
 def home_page():
     while True:
-        user_login = input("Login as: Admin (a) Customer (c)")
+        user_login = input("\nLogin as: Admin (a) Customer (c)")
+
         if user_login == "c":
             customer_login()
         elif user_login == "a":

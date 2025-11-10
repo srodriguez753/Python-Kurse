@@ -1,6 +1,13 @@
 
 todo_list = []
 
+
+class Todo:
+    def __init__(self, title):
+        self.title = title
+        self.is_done = False
+
+
 while True:
     for user_todo in todo_list:
         print(user_todo)
